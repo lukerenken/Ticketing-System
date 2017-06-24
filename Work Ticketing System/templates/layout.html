@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}WZDX Ticketing{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/static/css/normalize.min.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="/static/js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <header>
+
+          <div class="row">
+
+            <div class="grid-33">
+
+                <!-- link to rocketcitynow.com -->
+                <a href="http://rocketcitynow.com" title="RocketCityNow.com" class="icon-logo"></a>
+
+            </div>
+
+            <div class="grid-33">
+
+                <!-- Say Hi -->
+                <h1>Welcome to the WZDX Ticketing System</h1>
+
+                <!-- Log in/Log out link -->
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="right_anchor" title="Log out">Log Out</a>
+
+                <!-- Link to index of open tickets -->
+                <a href="{{ url_for('index') }}" class="left_anchor" title="Open tickets">See all open tickets</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="right_anchor" title="Log in">Log In</a>
+
+                <!-- Link to index of open tickets -->
+                <a href="{{ url_for('index') }}" class="left_anchor" title="Open tickets">See all open tickets</a>
+
+                 <!-- Registration link -->
+                <a href="{{ url_for('register') }}" class="right_anchor" title="Register">Register</a>
+                {% endif %}
+
+            </div>
+
+            <div class="grid-33">
+
+                <!-- link to nexstar.tv -->
+                <a href="http://nexstar.tv" class="icon-nexstar" title="Nexstar.tv"></a>
+
+            </div>
+
+          </div>
+
+        </header>
+        
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="notification {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="row">
+
+          <div class="main">
+
+            <nav>
+
+              <a href="{{ url_for('index') }}">All</a>
+
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('new_ticket') }}" class="new">Create a new ticket</a>
+                {% endif %}
+
+            </nav>
+
+            {% block content %}
+              {% endblock %}
+
+          </div>
+
+        </div>
+
+        <footer>
+
+          <div class="row">
+
+            <p>
+                A Trouble Ticketing System built with Flask<br>
+                Made by Luke Renken<br>
+                based off the Flask Social Media App by Kenneth Love of<br>
+                <a href="http://teamtreehouse.com">teamtreehouse.com</a>
+            </p>
+
+          </div>
+
+        </footer>
+
+        <script src="/static/js/vendor/disTime.min.js"></script>
+        <script src="/static/js/main.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for ticket in stream %}
+    <article>
+        <h2>
+            <a href="{{ url_for('stream', username=ticket.user.username) }}">{{ ticket.user.username }}</a>
+        </h2>
+        <i class="clock"></i>
+        <time data-time="{{ ticket.timestamp }}" class="datetime"
+              datetime="{{ ticket.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">
+            {{ ticket.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</time>
+        <a href="{{ url_for('view_ticket', ticket_id=ticket.id) }}" class="view">View</a>
+        <div class="ticket">
+            {{ ticket.problem }}
+        </div>
+    </article>
+{% endfor %}
+{% endblock %}
