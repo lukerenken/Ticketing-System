@@ -7,8 +7,8 @@ import forms
 import models
 
 DEBUG = True
-PORT = 8000
-HOST = '10.184.5.13'
+PORT = 80
+HOST = '192.168.0.3'
 
 app = Flask(__name__)
 app.secret_key = 'auoesh.bouoastuh.43,uoausoehuosth3ououea.auoub!'

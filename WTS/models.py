@@ -62,8 +62,10 @@ class Ticket(Model):
         database = DATABASE
         order_by = ('-ticket_number',)
 
-    def create(cls, equipment_type, equipment_brand, equipment_location, timestamp, ticket_number,
-                      department, description_of_problem, sign_of_damage, user, last_edited_by):
+    def create(cls, equipment_type, equipment_brand, 
+               equipment_location, timestamp, ticket_number,
+               department, description_of_problem, sign_of_damage, 
+               user, last_edited_by):
         try:
             with DATABASE.transaction():
                 cls.create(
